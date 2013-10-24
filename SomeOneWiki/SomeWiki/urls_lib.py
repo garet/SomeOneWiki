@@ -85,9 +85,10 @@ class UrlCacher:
         scheme_yaml_2 = yaml.dump(scheme_2)
         self.Add('/index.php', scheme_yaml_2, scheme_yaml_2)
 
-
+"""
 url = quote('%7Eguido/Python.html/fd sdf/,?asd=1&p=0&param=[ываавы,gdfgf]')
 obj = UrlCacher.Parse(url)
 
 cacher = UrlCacher()
 print(cacher._urls)
+"""
