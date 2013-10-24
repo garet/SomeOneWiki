@@ -10,8 +10,15 @@ from urllib.parse import parse_qs
 from urllib.parse import unquote
 from urllib.parse import quote
 
-from flask import Flask, redirect, request, url_for
+from flask import Flask
+from flask import redirect
+from flask import request
+from flask import url_for
+from flask import render_template
 
+class SomeClass:
+    def Apt(self):
+        return 'Say Hello!'
 
 app = Flask(__name__)
 
@@ -25,15 +32,22 @@ def ajax_handler(path):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def urls_handler(path):
-    return 'ST: %s' % path
+    data1 = SomeClass()
+    data2 = {'apt': 1, 'center': 'Center Text!'}
+    return render_template('/pages/default/index.tpl', data1=data1, data2=data2)
 
-#if __name__ == "__main__":
-#    app.run()
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
 
 
-import urls_lib
+"""
+from SomeWiki.urls_lib import UrlCacher
 
 def generate_page(url, request):
-    url_obj = urls_lib.Urls.Parse(url)
+    url_obj = UrlCacher.Parse(url)
+    print(url_obj)
 
-generate_page('/', None)
+generate_page('/asjdjkasdjkasd/asd/as?d=/asd/asd/ads.php', None)
+"""
