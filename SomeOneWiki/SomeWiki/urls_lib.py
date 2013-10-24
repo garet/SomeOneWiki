@@ -13,8 +13,8 @@ from urllib.parse import parse_qs
 from urllib.parse import unquote
 from urllib.parse import quote
 
-
-class Urls:
+class UrlCacher:
+    @staticmethod
     def Parse(url):
         result = {}
         url_tmp = unquote(url)
@@ -29,19 +29,18 @@ class Urls:
             result['aliase'] = ''
         else:
             section_list = splited_url[:-1]
-            result['section'] = Urls.SectionsMerge(section_list)
+            result['section'] = UrlCacher.SectionsMerge(section_list)
             result['aliase'] = splited_url[-1]
         result['params'] = parse_qs(url_obj.query)
         return result
-
+    
+    @staticmethod
     def SectionsMerge(lstlst, sep='/'):
         all = ''
         for lst in lstlst:
             all += lst + sep
         return all
-
-
-class UrlCacher:
+    
     _schemes = {}
     _urls = {}
     def Get(self, url):
@@ -88,7 +87,7 @@ class UrlCacher:
 
 
 url = quote('%7Eguido/Python.html/fd sdf/,?asd=1&p=0&param=[ываавы,gdfgf]')
-obj = Urls.Parse(url)
+obj = UrlCacher.Parse(url)
 
 cacher = UrlCacher()
 print(cacher._urls)
